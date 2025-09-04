@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quiz Colorido — Banco de Dados (80 questões)</title>
+<style>
+  :root{
+    --bg1: linear-gradient(135deg,#ffecd2 0%, #fcb69f 100%);
+    --card: linear-gradient(180deg,#ffffffd9, #ffffff);
+    --accent: #1f6feb;
+    --success: #2ecc71;
+    --danger: #ff4d4f;
+    --muted:#555;
+  }
+  body{
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    margin:0; padding:20px; background:var(--bg1); color:#222;
+  }
+  header{ text-align:center; margin-bottom:12px; }
+  h1{ margin:6px 0; font-size:26px; color:#10316b; }
+  p.lead{ margin:0; color:var(--muted); }
+
+  .container{ max-width:1100px; margin:18px auto; }
+
+  .controls{ display:flex; gap:12px; justify-content:center; margin:14px 0 20px; flex-wrap:wrap; }
+  .btn{
+    background:var(--accent); color:white; border:none; padding:10px 16px; border-radius:10px;
+    font-weight:600; cursor:pointer;
+  }
+  .btn.secondary{ background: #f0f0f0; color:#333; }
+  .score{ font-size:16px; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.7); }
+
+  .section-title{ margin:14px 0 6px; font-size:18px; color:#0b3a66; text-decoration:underline; }
+
+  .question{
+    background:var(--card); border-radius:10px; padding:12px; margin-bottom:10px;
+    box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+    border-left:8px solid rgba(31,111,235,0.12);
+  }
+  .q-title{ font-weight:700; margin-bottom:8px; color:#123; }
+  .options{ display:flex; flex-direction:column; gap:6px; }
+  label.option{
+    display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:8px;
+    border:1px dashed rgba(0,0,0,0.06); cursor:pointer; transition: all .12s;
+    background:transparent;
+  }
+  label.option:hover{ transform: translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,0.06); }
+  input[type="radio"]{ width:18px; height:18px; accent-color:var(--accent); }
+  .explanation{ margin-top:8px; padding:10px; border-radius:8px; background:#fffef0; display:none; color:#222; }
+  .explanation strong{ color:var(--accent); }
+
+  .correct{ background: rgba(46,204,113,0.14) !important; border-color: rgba(46,204,113,0.3) !important; }
+  .wrong{ background: rgba(255,77,79,0.08) !important; border-color: rgba(255,77,79,0.25) !important; color: #8b0000; }
+
+  footer{ text-align:center; margin-top:18px; color:var(--muted); font-size:13px; }
+  @media (max-width:800px){
+    .container{ padding:0 10px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Quiz — Banco de Dados (80 questões)</h1>
+    <p class="lead">20 questões por arquivo (Aula2, aula3, aula4, Mapeamento). Clique em <strong>Corrigir / Mostrar resultado</strong>.</p>
+  </header>
+
+  <main class="container">
+    <div class="controls">
+  <button id="gradeBtn" class="btn">Corrigir / Mostrar resultado</button>
+  <button id="resetBtn" class="btn secondary">Reiniciar</button>
+  <button id="saveDraftBtn" class="btn secondary">Salvar rascunho (local)</button>
+  <button id="sendSheetBtn" class="btn">Enviar para Google Planilhas</button>
+  <button id="sendEmailBtn" class="btn secondary">Enviar por e-mail (EmailJS)</button>
+  <div id="score" class="score">Acertos: 0 | Erros: 0</div>
+</div>
+
+
+    <!-- Section: Aula2 (questões 1-20) -->
+    <div class="section-title">Aula2 — Introdução a SGBD & Modelos (Questões 1–20)</div>
+
+    <!-- Q1 -->
+    <div class="question" id="q1">
+      <div class="q-title">1) O que é um SGBD?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q1" value="A"> A) Um tipo de processador.</label>
+        <label class="option"><input type="radio" name="q1" value="B"> B) Um software para definir, construir, manipular e compartilhar um BD.</label>
+        <label class="option"><input type="radio" name="q1" value="C"> C) Um navegador de internet.</label>
+        <label class="option"><input type="radio" name="q1" value="D"> D) Um editor de imagens.</label>
+        <label class="option"><input type="radio" name="q1" value="E"> E) Uma linguagem de programação.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q2">
+      <div class="q-title">2) Por que usar um SGBD? (um dos motivos)</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q2" value="A"> A) Para aumentar redundância dos dados.</label>
+        <label class="option"><input type="radio" name="q2" value="B"> B) Para controlar redundância e permitir compartilhamento.</label>
+        <label class="option"><input type="radio" name="q2" value="C"> C) Para substituir o sistema operacional.</label>
+        <label class="option"><input type="radio" name="q2" value="D"> D) Para criar páginas web automaticamente.</label>
+        <label class="option"><input type="radio" name="q2" value="E"> E) Para escrever e-mails.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q3">
+      <div class="q-title">3) O que são metadados?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q3" value="A"> A) Os próprios dados do usuário.</label>
+        <label class="option"><input type="radio" name="q3" value="B"> B) Dados que descrevem outros dados (descrição do BD).</label>
+        <label class="option"><input type="radio" name="q3" value="C"> C) Um tipo de backup.</label>
+        <label class="option"><input type="radio" name="q3" value="D"> D) Um relatório financeiro.</label>
+        <label class="option"><input type="radio" name="q3" value="E"> E) Uma linguagem de consulta.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q4">
+      <div class="q-title">4) O que significa independência dados-programa?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="A"> A) O programa controla o hardware diretamente.</label>
+        <label class="option"><input type="radio" name="q4" value="B"> B) Mudanças na estrutura física do BD não exigem reescrever programas.</label>
+        <label class="option"><input type="radio" name="q4" value="C"> C) O banco de dados é portátil entre países.</label>
+        <label class="option"><input type="radio" name="q4" value="D"> D) O programa roda sem sistema operacional.</label>
+        <label class="option"><input type="radio" name="q4" value="E"> E) O usuário não precisa de senha.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q5">
+      <div class="q-title">5) Em modelos de dados, qual é um exemplo de modelo conceitual?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q5" value="A"> A) Modelo Relacional.</label>
+        <label class="option"><input type="radio" name="q5" value="B"> B) MER (Modelo Entidade-Relacionamento).</label>
+        <label class="option"><input type="radio" name="q5" value="C"> C) Sistema Operacional.</label>
+        <label class="option"><input type="radio" name="q5" value="D"> D) HTML.</label>
+        <label class="option"><input type="radio" name="q5" value="E"> E) Rede TCP/IP.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q6">
+      <div class="q-title">6) O que é uma instância de BD?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q6" value="A"> A) O software SGBD em si.</label>
+        <label class="option"><input type="radio" name="q6" value="B"> B) O estado do BD em um dado instante (os dados concretos presentes).</label>
+        <label class="option"><input type="radio" name="q6" value="C"> C) Um backup antigo.</label>
+        <label class="option"><input type="radio" name="q6" value="D"> D) A documentação do projeto.</label>
+        <label class="option"><input type="radio" name="q6" value="E"> E) Um script SQL vazio.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q7">
+      <div class="q-title">7) ACID: qual propriedade garante que uma transação completa todas as suas operações ou não faz nenhuma?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q7" value="A"> A) Consistência.</label>
+        <label class="option"><input type="radio" name="q7" value="B"> B) Atomicidade.</label>
+        <label class="option"><input type="radio" name="q7" value="C"> C) Durabilidade.</label>
+        <label class="option"><input type="radio" name="q7" value="D"> D) Independência.</label>
+        <label class="option"><input type="radio" name="q7" value="E"> E) Isolamento.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q8">
+      <div class="q-title">8) ACID: qual propriedade garante que mudanças confirmadas persistem mesmo após falha?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q8" value="A"> A) Atomicidade.</label>
+        <label class="option"><input type="radio" name="q8" value="B"> B) Consistência.</label>
+        <label class="option"><input type="radio" name="q8" value="C"> C) Durabilidade.</label>
+        <label class="option"><input type="radio" name="q8" value="D"> D) Isolamento.</label>
+        <label class="option"><input type="radio" name="q8" value="E"> E) Neutralidade.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q9">
+      <div class="q-title">9) O que define um esquema de dados?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q9" value="A"> A) Um conjunto de instâncias aleatórias.</label>
+        <label class="option"><input type="radio" name="q9" value="B"> B) A descrição de um BD segundo um modelo de dados (estrutura e restrições).</label>
+        <label class="option"><input type="radio" name="q9" value="C"> C) O histórico de backups.</label>
+        <label class="option"><input type="radio" name="q9" value="D"> D) Uma linguagem de programação.</label>
+        <label class="option"><input type="radio" name="q9" value="E"> E) Um tipo de rede.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q10">
+      <div class="q-title">10) Em um esquema relacional, o que é um atributo derivado?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q10" value="A"> A) Um atributo calculado a partir de outros (ex.: idade a partir de data_nasc).</label>
+        <label class="option"><input type="radio" name="q10" value="B"> B) Um atributo que nunca muda.</label>
+        <label class="option"><input type="radio" name="q10" value="C"> C) Uma chave primária.</label>
+        <label class="option"><input type="radio" name="q10" value="D"> D) Um índice.</label>
+        <label class="option"><input type="radio" name="q10" value="E"> E) Um tipo de usuário.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q11">
+      <div class="q-title">11) Quais são exemplos de SGBDs relacionais (mencione um na prática)?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q11" value="A"> A) Oracle, MySQL, PostgreSQL.</label>
+        <label class="option"><input type="radio" name="q11" value="B"> B) Photoshop, Illustrator.</label>
+        <label class="option"><input type="radio" name="q11" value="C"> C) Windows, Linux.</label>
+        <label class="option"><input type="radio" name="q11" value="D"> D) Chrome, Firefox.</label>
+        <label class="option"><input type="radio" name="q11" value="E"> E) Excel, Word.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q12">
+      <div class="q-title">12) O que é independência física?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q12" value="A"> A) A capacidade de mudar o armazenamento físico sem alterar o esquema lógico.</label>
+        <label class="option"><input type="radio" name="q12" value="B"> B) A habilidade do SGBD de rodar sem energia.</label>
+        <label class="option"><input type="radio" name="q12" value="C"> C) Um tipo de usuário com privilégios completos.</label>
+        <label class="option"><input type="radio" name="q12" value="D"> D) Um backup completo do BD.</label>
+        <label class="option"><input type="radio" name="q12" value="E"> E) Uma linguagem de consulta específica.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q13">
+      <div class="q-title">13) Em modelos de dados, um 'modelo lógico' é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q13" value="A"> A) O desenho físico do disco.</label>
+        <label class="option"><input type="radio" name="q13" value="B"> B) O modelo que descreve estruturas (ex.: relacional) sem detalhes físicos.</label>
+        <label class="option"><input type="radio" name="q13" value="C"> C) Uma licença de software.</label>
+        <label class="option"><input type="radio" name="q13" value="D"> D) Um tipo de diagrama elétrico.</label>
+        <label class="option"><input type="radio" name="q13" value="E"> E) Um tipo de servidor web.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q14">
+      <div class="q-title">14) O que é redundância de dados?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q14" value="A"> A) Armazenamento de informações duplicadas em vários lugares.</label>
+        <label class="option"><input type="radio" name="q14" value="B"> B) Exclusivamente backup em fita magnética.</label>
+        <label class="option"><input type="radio" name="q14" value="C"> C) Uma técnica de compactação.</label>
+        <label class="option"><input type="radio" name="q14" value="D"> D) Um protocolo de rede.</label>
+        <label class="option"><input type="radio" name="q14" value="E"> E) Um algoritmo de ordenação.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q15">
+      <div class="q-title">15) O que é uma 'visão externa' (view externa)?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q15" value="A"> A) A interface que cada usuário vê (subconjunto do BD).</label>
+        <label class="option"><input type="radio" name="q15" value="B"> B) Um arquivo de log.</label>
+        <label class="option"><input type="radio" name="q15" value="C"> C) Um hardware de armazenamento.</label>
+        <label class="option"><input type="radio" name="q15" value="D"> D) Uma tabela temporária somente.</label>
+        <label class="option"><input type="radio" name="q15" value="E"> E) Um tipo de backup incremental.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q16">
+      <div class="q-title">16) No contexto de SGBD, o que significa 'concorrência'?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q16" value="A"> A) Quando múltiplas transações acessam o BD simultaneamente.</label>
+        <label class="option"><input type="radio" name="q16" value="B"> B) Quando um SGBD disputa com outro por mercado.</label>
+        <label class="option"><input type="radio" name="q16" value="C"> C) Quando os backups são duplicados.</label>
+        <label class="option"><input type="radio" name="q16" value="D"> D) Quando o sistema roda monousuário apenas.</label>
+        <label class="option"><input type="radio" name="q16" value="E"> E) Quando há falha no disco.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q17">
+      <div class="q-title">17) O que é 'tolerância a falhas' em SGBD?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q17" value="A"> A) Capacidade do BD continuar correto após falhas de hardware/software (com recuperação).</label>
+        <label class="option"><input type="radio" name="q17" value="B"> B) Ignorar erros de consulta.</label>
+        <label class="option"><input type="radio" name="q17" value="C"> C) Não permitir múltiplos usuários.</label>
+        <label class="option"><input type="radio" name="q17" value="D"> D) Uma técnica de criptografia.</label>
+        <label class="option"><input type="radio" name="q17" value="E"> E) Um algoritmo de ordenação.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q18">
+      <div class="q-title">18) Esquema relacional = ?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q18" value="A"> A) Descrição das tabelas e colunas segundo o modelo relacional.</label>
+        <label class="option"><input type="radio" name="q18" value="B"> B) Conjunto de scripts Python.</label>
+        <label class="option"><input type="radio" name="q18" value="C"> C) Um tipo de banco de dados NoSQL.</label>
+        <label class="option"><input type="radio" name="q18" value="D"> D) Um diagrama elétrico.</label>
+        <label class="option"><input type="radio" name="q18" value="E"> E) Um backup físico.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q19">
+      <div class="q-title">19) Em modelos conceituais, o que é um 'domínio' de um atributo?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q19" value="A"> A) Conjunto de valores permitidos para esse atributo (ex.: string, inteiro).</label>
+        <label class="option"><input type="radio" name="q19" value="B"> B) Um servidor web.</label>
+        <label class="option"><input type="radio" name="q19" value="C"> C) Uma linguagem de consulta.</label>
+        <label class="option"><input type="radio" name="q19" value="D"> D) Um banco de dados em nuvem.</label>
+        <label class="option"><input type="radio" name="q19" value="E"> E) Um tipo de índice.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q20">
+      <div class="q-title">20) Modelos de dados tipicamente incluem:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q20" value="A"> A) Estruturas, regras de integridade e operações sobre os dados.</label>
+        <label class="option"><input type="radio" name="q20" value="B"> B) Apenas interfaces gráficas.</label>
+        <label class="option"><input type="radio" name="q20" value="C"> C) Somente scripts de backup.</label>
+        <label class="option"><input type="radio" name="q20" value="D"> D) Apenas arquivos de texto.</label>
+        <label class="option"><input type="radio" name="q20" value="E"> E) Sistemas operacionais.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <!-- Section: aula3 (questões 21-40) -->
+    <div class="section-title">aula3 — MER, chaves e restrições (Questões 21–40)</div>
+
+    <div class="question" id="q21">
+      <div class="q-title">21) No MER, o que representa uma entidade?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q21" value="A"> A) Um conjunto de instâncias do mesmo tipo (ex.: Pessoa, Departamento).</label>
+        <label class="option"><input type="radio" name="q21" value="B"> B) Um índice em disco.</label>
+        <label class="option"><input type="radio" name="q21" value="C"> C) Um script SQL.</label>
+        <label class="option"><input type="radio" name="q21" value="D"> D) Um backup.</label>
+        <label class="option"><input type="radio" name="q21" value="E"> E) Um hardware dedicado.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q22">
+      <div class="q-title">22) O que é um atributo composto?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q22" value="A"> A) Um atributo formado por subatributos (ex.: Endereço = rua, número).</label>
+        <label class="option"><input type="radio" name="q22" value="B"> B) Um atributo que só aceita números.</label>
+        <label class="option"><input type="radio" name="q22" value="C"> C) Um índice único.</label>
+        <label class="option"><input type="radio" name="q22" value="D"> D) Um tipo de relação N:M.</label>
+        <label class="option"><input type="radio" name="q22" value="E"> E) Um esquema físico.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q23">
+      <div class="q-title">23) Atributo multivalorado significa:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q23" value="A"> A) Atributo que aceita vários valores por instância (ex.: telefones).</label>
+        <label class="option"><input type="radio" name="q23" value="B"> B) Um índice secundário apenas.</label>
+        <label class="option"><input type="radio" name="q23" value="C"> C) Um atributo que nunca é nulo.</label>
+        <label class="option"><input type="radio" name="q23" value="D"> D) Um tipo de chave.</label>
+        <label class="option"><input type="radio" name="q23" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q24">
+      <div class="q-title">24) O que é uma superchave?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q24" value="A"> A) Um conjunto de atributos que identifica instâncias (pode ter atributos extras).</label>
+        <label class="option"><input type="radio" name="q24" value="B"> B) Um tipo de diagrama ER.</label>
+        <label class="option"><input type="radio" name="q24" value="C"> C) Um índice invertido.</label>
+        <label class="option"><input type="radio" name="q24" value="D"> D) Um arquivo temporário.</label>
+        <label class="option"><input type="radio" name="q24" value="E"> E) Um atributo derivado.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q25">
+      <div class="q-title">25) A menor superchave que não tem sub-subconjunto identificador é chamada de:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q25" value="A"> A) Chave candidata.</label>
+        <label class="option"><input type="radio" name="q25" value="B"> B) Chave estrangeira.</label>
+        <label class="option"><input type="radio" name="q25" value="C"> C) Índice composto.</label>
+        <label class="option"><input type="radio" name="q25" value="D"> D) Chave multivalorada.</label>
+        <label class="option"><input type="radio" name="q25" value="E"> E) Chave derivada.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q26">
+      <div class="q-title">26) Em cardinalidades, 1:N significa:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q26" value="A"> A) Uma instância de A pode relacionar-se com muitas de B; cada B com no máximo uma A.</label>
+        <label class="option"><input type="radio" name="q26" value="B"> B) Muitas para muitas.</label>
+        <label class="option"><input type="radio" name="q26" value="C"> C) Um para um.</label>
+        <label class="option"><input type="radio" name="q26" value="D"> D) Zero para zero.</label>
+        <label class="option"><input type="radio" name="q26" value="E"> E) Irrelevante.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q27">
+      <div class="q-title">27) Qual representação é usada em MER clássico?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q27" value="A"> A) Chen (bolinhas e retângulos).</label>
+        <label class="option"><input type="radio" name="q27" value="B"> B) Diagrama elétrico.</label>
+        <label class="option"><input type="radio" name="q27" value="C"> C) Fluxograma UML somente.</label>
+        <label class="option"><input type="radio" name="q27" value="D"> D) HTML.</label>
+        <label class="option"><input type="radio" name="q27" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q28">
+      <div class="q-title">28) Em integridade, 'totalidade' refere-se a:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q28" value="A"> A) Obrigatoriedade do relacionamento entre entidades (p.ex.: todo empregado deve estar em um departamento).</label>
+        <label class="option"><input type="radio" name="q28" value="B"> B) Tamanho máximo do banco de dados.</label>
+        <label class="option"><input type="radio" name="q28" value="C"> C) Número de backups realizados.</label>
+        <label class="option"><input type="radio" name="q28" value="D"> D) Velocidade da consulta.</label>
+        <label class="option"><input type="radio" name="q28" value="E"> E) Tipo de servidor.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q29">
+      <div class="q-title">29) "Todo empregado deve estar lotado num departamento" é exemplo de:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q29" value="A"> A) Restrição de integridade (regra de negócio).</label>
+        <label class="option"><input type="radio" name="q29" value="B"> B) Um tipo de backup.</label>
+        <label class="option"><input type="radio" name="q29" value="C"> C) Uma linguagem de programação.</label>
+        <label class="option"><input type="radio" name="q29" value="D"> D) Um índice.</label>
+        <label class="option"><input type="radio" name="q29" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q30">
+      <div class="q-title">30) Um diagrama ER bem modelado ajuda a:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q30" value="A"> A) Entender o problema do mundo real antes de criar o BD.</label>
+        <label class="option"><input type="radio" name="q30" value="B"> B) Substituir o SGBD.</label>
+        <label class="option"><input type="radio" name="q30" value="C"> C) Acelerar hardware.</label>
+        <label class="option"><input type="radio" name="q30" value="D"> D) Minimizar a equipe.</label>
+        <label class="option"><input type="radio" name="q30" value="E"> E) Criar páginas web automaticamente.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q31">
+      <div class="q-title">31) Em um problema universitário, "alunos matriculados em várias disciplinas" é exemplo de:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q31" value="A"> A) Relacionamento N:M entre Aluno e Disciplina.</label>
+        <label class="option"><input type="radio" name="q31" value="B"> B) Relacionamento 1:1.</label>
+        <label class="option"><input type="radio" name="q31" value="C"> C) Relacionamento inexistente.</label>
+        <label class="option"><input type="radio" name="q31" value="D"> D) Entidade fraca.</label>
+        <label class="option"><input type="radio" name="q31" value="E"> E) Atributo multivalorado em aluno.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q32">
+      <div class="q-title">32) Em MER, como são representados atributos no diagrama Chen?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q32" value="A"> A) Por bolinhas ligadas à entidade.</label>
+        <label class="option"><input type="radio" name="q32" value="B"> B) Por retângulos só.</label>
+        <label class="option"><input type="radio" name="q32" value="C"> C) Por setas duplas.</label>
+        <label class="option"><input type="radio" name="q32" value="D"> D) Por linhas tracejadas sem rótulo.</label>
+        <label class="option"><input type="radio" name="q32" value="E"> E) Por texto em itálico.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q33">
+      <div class="q-title">33) O que é um dicionário de dados?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q33" value="A"> A) Documento que descreve entidades, atributos, domínios e restrições do BD.</label>
+        <label class="option"><input type="radio" name="q33" value="B"> B) Uma lista de palavras para o SGBD.</label>
+        <label class="option"><input type="radio" name="q33" value="C"> C) Um manual do usuário do SGBD.</label>
+        <label class="option"><input type="radio" name="q33" value="D"> D) Um tipo de backup.</label>
+        <label class="option"><input type="radio" name="q33" value="E"> E) Um índice invertido.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q34">
+      <div class="q-title">34) Um relacionamento N-ário (n>2) ao mapear para o relacional vira:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q34" value="A"> A) Uma nova relação (tabela) com chaves estrangeiras das entidades participantes.</label>
+        <label class="option"><input type="radio" name="q34" value="B"> B) Um atributo simples.</label>
+        <label class="option"><input type="radio" name="q34" value="C"> C) Um índice.</label>
+        <label class="option"><input type="radio" name="q34" value="D"> D) Uma view externa.</label>
+        <label class="option"><input type="radio" name="q34" value="E"> E) Uma coluna criptografada.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q35">
+      <div class="q-title">35) "Uma disciplina possui pré-requisitos" -> esse pré-requisito pode ser modelado como:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q35" value="A"> A) Relacionamento recursivo entre disciplina e disciplina.</label>
+        <label class="option"><input type="radio" name="q35" value="B"> B) Entidade separada sem ligação.</label>
+        <label class="option"><input type="radio" name="q35" value="C"> C) Um atributo simples.</label>
+        <label class="option"><input type="radio" name="q35" value="D"> D) Um índice.</label>
+        <label class="option"><input type="radio" name="q35" value="E"> E) Uma view materializada.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q36">
+      <div class="q-title">36) Ao analisar diagramas, "erros nas relações" geralmente significam:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q36" value="A"> A) Cardinalidade ou totalidade incorretas entre entidades.</label>
+        <label class="option"><input type="radio" name="q36" value="B"> B) Falta de backups.</label>
+        <label class="option"><input type="radio" name="q36" value="C"> C) Código SQL mal formatado.</label>
+        <label class="option"><input type="radio" name="q36" value="D"> D) Problemas de hardware.</label>
+        <label class="option"><input type="radio" name="q36" value="E"> E) Semântica de rede incorreta.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q37">
+      <div class="q-title">37) Representação UML pode ser usada para modelar MER? (resposta curta)</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q37" value="A"> A) Sim — UML é outra forma de representar classes/relacionamentos.</label>
+        <label class="option"><input type="radio" name="q37" value="B"> B) Não — UML é apenas para hardware.</label>
+        <label class="option"><input type="radio" name="q37" value="C"> C) Não — UML não tem atributos.</label>
+        <label class="option"><input type="radio" name="q37" value="D"> D) Sim — mas não representa cardinalidade.</label>
+        <label class="option"><input type="radio" name="q37" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q38">
+      <div class="q-title">38) Em um diagrama, como se indica que um atributo é chave primária (no estilo tradicional)?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q38" value="A"> A) Sublinhando o atributo.</label>
+        <label class="option"><input type="radio" name="q38" value="B"> B) Usando itálico.</label>
+        <label class="option"><input type="radio" name="q38" value="C"> C) Colorindo de vermelho.</label>
+        <label class="option"><input type="radio" name="q38" value="D"> D) Colocando em negrito somente.</label>
+        <label class="option"><input type="radio" name="q38" value="E"> E) Nenhuma notação.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q39">
+      <div class="q-title">39) O que é restrição de integridade referencial?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q39" value="A"> A) Regra que garante que chaves estrangeiras referenciem tuplas válidas na tabela referenciada.</label>
+        <label class="option"><input type="radio" name="q39" value="B"> B) Técnica de indexação.</label>
+        <label class="option"><input type="radio" name="q39" value="C"> C) Um tipo de tabela temporária.</label>
+        <label class="option"><input type="radio" name="q39" value="D"> D) Um modelo conceitual alternativo.</label>
+        <label class="option"><input type="radio" name="q39" value="E"> E) Um backup incremental.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q40">
+      <div class="q-title">40) Ao modelar um problema, por que é importante definir domínios dos atributos?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q40" value="A"> A) Para limitar valores válidos e permitir validação de integridade.</label>
+        <label class="option"><input type="radio" name="q40" value="B"> B) Só para enfeitar o diagrama.</label>
+        <label class="option"><input type="radio" name="q40" value="C"> C) Para dividir o BD em vários discos.</label>
+        <label class="option"><input type="radio" name="q40" value="D"> D) Para acelerar downloads.</label>
+        <label class="option"><input type="radio" name="q40" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <!-- Section: aula4 (questões 41-60) -->
+    <div class="section-title">aula4 — Entidades fracas, especialização e EER (Questões 41–60)</div>
+
+    <div class="question" id="q41">
+      <div class="q-title">41) O que é uma entidade fraca?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q41" value="A"> A) Entidade cuja existência depende de outra (entidade forte).</label>
+        <label class="option"><input type="radio" name="q41" value="B"> B) Entidade que tem muitos atributos.</label>
+        <label class="option"><input type="radio" name="q41" value="C"> C) Tabela com índices apenas.</label>
+        <label class="option"><input type="radio" name="q41" value="D"> D) Um backup da entidade.</label>
+        <label class="option"><input type="radio" name="q41" value="E"> E) Um tipo de atributo derivado.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q42">
+      <div class="q-title">42) Em especialização, o que é 'cobertura total'?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q42" value="A"> A) Toda instância da superentidade pertence a pelo menos uma subentidade.</label>
+        <label class="option"><input type="radio" name="q42" value="B"> B) As subentidades ficam vazias.</label>
+        <label class="option"><input type="radio" name="q42" value="C"> C) A especialização não permite herança.</label>
+        <label class="option"><input type="radio" name="q42" value="D"> D) A superentidade perde atributos.</label>
+        <label class="option"><input type="radio" name="q42" value="E"> E) Uma técnica de backup.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q43">
+      <div class="q-title">43) Em especialização, 'disjunção' significa:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q43" value="A"> A) Uma instância pode pertencer a no máximo uma subentidade (mutuamente exclusiva).</label>
+        <label class="option"><input type="radio" name="q43" value="B"> B) Instância pertence a todas as subentidades ao mesmo tempo.</label>
+        <label class="option"><input type="radio" name="q43" value="C"> C) Uma técnica de indexação.</label>
+        <label class="option"><input type="radio" name="q43" value="D"> D) Um tipo de diagrama ER inválido.</label>
+        <label class="option"><input type="radio" name="q43" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q44">
+      <div class="q-title">44) Em especialização, 'sobreposição' significa:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q44" value="A"> A) Uma instância pode pertencer a mais de uma subentidade simultaneamente.</label>
+        <label class="option"><input type="radio" name="q44" value="B"> B) Instância não pode pertencer a nenhuma subentidade.</label>
+        <label class="option"><input type="radio" name="q44" value="C"> C) Técnica de compressão de dados.</label>
+        <label class="option"><input type="radio" name="q44" value="D"> D) Um tipo de restrição de integridade.</label>
+        <label class="option"><input type="radio" name="q44" value="E"> E) Um índice múltiplo.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q45">
+      <div class="q-title">45) O que é generalização (oposto de especialização)?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q45" value="A"> A) Processo de sintetizar subentidades em uma superentidade comum.</label>
+        <label class="option"><input type="radio" name="q45" value="B"> B) Dividir uma entidade em várias tabelas físicas.</label>
+        <label class="option"><input type="radio" name="q45" value="C"> C) Remover atributos multivalorados.</label>
+        <label class="option"><input type="radio" name="q45" value="D"> D) Identificar chaves primárias compostas.</label>
+        <label class="option"><input type="radio" name="q45" value="E"> E) Criar backups incrementais.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q46">
+      <div class="q-title">46) Em EER, subclasses herdam o quê da superclasse?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q46" value="A"> A) Atributos e relacionamentos.</label>
+        <label class="option"><input type="radio" name="q46" value="B"> B) Somente índices.</label>
+        <label class="option"><input type="radio" name="q46" value="C"> C) Nada — são totalmente independentes.</label>
+        <label class="option"><input type="radio" name="q46" value="D"> D) Apenas a chave primária.</label>
+        <label class="option"><input type="radio" name="q46" value="E"> E) Apenas atributos derivados.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q47">
+      <div class="q-title">47) Exemplo: Empregado → Engenheiro, Secretária. Se um Engenheiro é sempre empregado, isso é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q47" value="A"> A) Especialização (subclasse é um empregado).</label>
+        <label class="option"><input type="radio" name="q47" value="B"> B) Entidade fraca.</label>
+        <label class="option"><input type="radio" name="q47" value="C"> C) Remoção de atributos.</label>
+        <label class="option"><input type="radio" name="q47" value="D"> D) Relacionamento N:M.</label>
+        <label class="option"><input type="radio" name="q47" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q48">
+      <div class="q-title">48) Entidade fraca geralmente tem sua chave primária formada por:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q48" value="A"> A) Combinação da chave da entidade forte + identificador local.</label>
+        <label class="option"><input type="radio" name="q48" value="B"> B) Apenas um número sequencial sem relação.</label>
+        <label class="option"><input type="radio" name="q48" value="C"> C) Um índice externo.</label>
+        <label class="option"><input type="radio" name="q48" value="D"> D) Um atributo derivado.</label>
+        <label class="option"><input type="radio" name="q48" value="E"> E) Uma view.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q49">
+      <div class="q-title">49) Qual é a diferença prática entre EER e MER?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q49" value="A"> A) EER adiciona conceitos como especialização/generalização ao MER.</label>
+        <label class="option"><input type="radio" name="q49" value="B"> B) EER é usado para hardware.</label>
+        <label class="option"><input type="radio" name="q49" value="C"> C) MER permite herança, EER não.</label>
+        <label class="option"><input type="radio" name="q49" value="D"> D) São idênticos sem diferença.</label>
+        <label class="option"><input type="radio" name="q49" value="E"> E) EER é só para bancos NoSQL.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q50">
+      <div class="q-title">50) Em um EER, quando se usa especialização com m subclasses, qual opção de mapeamento pode ser usada?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q50" value="A"> A) Várias estratégias: tabela por superclasse, por subclasse, ou tabela por hierarquia.</label>
+        <label class="option"><input type="radio" name="q50" value="B"> B) Apenas uma tabela global obrigatória.</label>
+        <label class="option"><input type="radio" name="q50" value="C"> C) Não se faz mapeamento.</label>
+        <label class="option"><input type="radio" name="q50" value="D"> D) Converter tudo em atributos multivalorados.</label>
+        <label class="option"><input type="radio" name="q50" value="E"> E) Criar um backup separado.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q51">
+      <div class="q-title">51) Quando uma subentidade herda atributos, ela pode também ter:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q51" value="A"> A) Atributos próprios além dos herdados.</label>
+        <label class="option"><input type="radio" name="q51" value="B"> B) Somente herdar, sem atributos próprios.</label>
+        <label class="option"><input type="radio" name="q51" value="C"> C) Nenhuma propriedade adicional.</label>
+        <label class="option"><input type="radio" name="q51" value="D"> D) Apenas índices.</label>
+        <label class="option"><input type="radio" name="q51" value="E"> E) Somente chaves estrangeiras.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q52">
+      <div class="q-title">52) Um exemplo de atributo que só se aplica a subclasse Engenheiro (não a todos empregados) é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q52" value="A"> A) CREA (registro profissional).</label>
+        <label class="option"><input type="radio" name="q52" value="B"> B) Data de nascimento (aplica-se a todos).</label>
+        <label class="option"><input type="radio" name="q52" value="C"> C) Nome (aplica-se a todos).</label>
+        <label class="option"><input type="radio" name="q52" value="D"> D) CPF (aplica-se a todos).</label>
+        <label class="option"><input type="radio" name="q52" value="E"> E) Salário (aplica-se a todos).</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q53">
+      <div class="q-title">53) Cobertura parcial significa:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q53" value="A"> A) Nem toda instância da superentidade precisa pertencer a alguma subentidade.</label>
+        <label class="option"><input type="radio" name="q53" value="B"> B) Toda instância deve pertencer a todas as subentidades.</label>
+        <label class="option"><input type="radio" name="q53" value="C"> C) Subentidades sem atributos.</label>
+        <label class="option"><input type="radio" name="q53" value="D"> D) Entidade fraca obrigatória.</label>
+        <label class="option"><input type="radio" name="q53" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q54">
+      <div class="q-title">54) Quando excluir a entidade dominante, a entidade fraca deve:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q54" value="A"> A) Ser removida junto (dependência de existência).</label>
+        <label class="option"><input type="radio" name="q54" value="B"> B) Permanecer sempre independente.</label>
+        <label class="option"><input type="radio" name="q54" value="C"> C) Tornar-se superentidade.</label>
+        <label class="option"><input type="radio" name="q54" value="D"> D) Migrar para outra tabela.</label>
+        <label class="option"><input type="radio" name="q54" value="E"> E) Ser convertida em atributo.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q55">
+      <div class="q-title">55) No exemplo do posto de gasolina (EER), combustível dividido em gasolina/álcool/diesel é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q55" value="A"> A) Uma especialização (subtipos de produto).</label>
+        <label class="option"><input type="radio" name="q55" value="B"> B) Um atributo multivalorado.</label>
+        <label class="option"><input type="radio" name="q55" value="C"> C) Uma chave primária.</label>
+        <label class="option"><input type="radio" name="q55" value="D"> D) Uma tabela temporária.</label>
+        <label class="option"><input type="radio" name="q55" value="E"> E) Um backup.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q56">
+      <div class="q-title">56) EER ajuda a modelar situações onde:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q56" value="A"> A) É necessário representar herança, restrições de disjunção/sobreposição e subtipos.</label>
+        <label class="option"><input type="radio" name="q56" value="B"> B) Apenas para modelar arquivos de texto.</label>
+        <label class="option"><input type="radio" name="q56" value="C"> C) Apenas para machine learning.</label>
+        <label class="option"><input type="radio" name="q56" value="D"> D) Para compressão de imagens.</label>
+        <label class="option"><input type="radio" name="q56" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q57">
+      <div class="q-title">57) Exemplo prático: uma venda tem produto e data — isso é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q57" value="A"> A) Um relacionamento entre Venda e Produto com atributo data.</label>
+        <label class="option"><input type="radio" name="q57" value="B"> B) Um atributo multivalorado do produto.</label>
+        <label class="option"><input type="radio" name="q57" value="C"> C) Uma view externa.</label>
+        <label class="option"><input type="radio" name="q57" value="D"> D) Um backup diário.</label>
+        <label class="option"><input type="radio" name="q57" value="E"> E) Um tipo de índice.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q58">
+      <div class="q-title">58) EER estendido permite representar quais conceitos a mais?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q58" value="A"> A) Especialização, generalização, entidades fracas e restrições avançadas.</label>
+        <label class="option"><input type="radio" name="q58" value="B"> B) Apenas backups.</label>
+        <label class="option"><input type="radio" name="q58" value="C"> C) Hardware de disco.</label>
+        <label class="option"><input type="radio" name="q58" value="D"> D) Linguagens de programação.</label>
+        <label class="option"><input type="radio" name="q58" value="E"> E) Servidores web.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q59">
+      <div class="q-title">59) Por que especializar uma entidade?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q59" value="A"> A) Porque certos atributos/relacionamentos aplicam-se somente a alguns membros.</label>
+        <label class="option"><input type="radio" name="q59" value="B"> B) Para criar backups automáticos.</label>
+        <label class="option"><input type="radio" name="q59" value="C"> C) Para reduzir espaço em disco apenas.</label>
+        <label class="option"><input type="radio" name="q59" value="D"> D) Para substituir o dicionário de dados.</label>
+        <label class="option"><input type="radio" name="q59" value="E"> E) Para modelar hardware.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q60">
+      <div class="q-title">60) Um diagrama EER é útil para:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q60" value="A"> A) Projetar BD complexos com subtipos e restrições claras.</label>
+        <label class="option"><input type="radio" name="q60" value="B"> B) Editar imagens.</label>
+        <label class="option"><input type="radio" name="q60" value="C"> C) Acelerar CPU.</label>
+        <label class="option"><input type="radio" name="q60" value="D"> D) Controlar impressoras.</label>
+        <label class="option"><input type="radio" name="q60" value="E"> E) Nada relacionado a BD.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <!-- Section: Mapeamento (questões 61-80) -->
+    <div class="section-title">Mapeamento ER → Relacional (Questões 61–80)</div>
+
+    <div class="question" id="q61">
+      <div class="q-title">61) Regra geral para mapear uma entidade regular ao modelo relacional:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q61" value="A"> A) Criar uma tabela com atributos simples; escolher uma chave primária.</label>
+        <label class="option"><input type="radio" name="q61" value="B"> B) Ignorar a entidade.</label>
+        <label class="option"><input type="radio" name="q61" value="C"> C) Converter em um atributo multivalorado.</label>
+        <label class="option"><input type="radio" name="q61" value="D"> D) Criar vários arquivos de texto.</label>
+        <label class="option"><input type="radio" name="q61" value="E"> E) Mapear sempre como entidade fraca.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q62">
+      <div class="q-title">62) Ao mapear atributos compostos, o que fazemos?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q62" value="A"> A) Incluir apenas os subatributos atômicos na tabela.</label>
+        <label class="option"><input type="radio" name="q62" value="B"> B) Manter como um campo único com vírgulas.</label>
+        <label class="option"><input type="radio" name="q62" value="C"> C) Ignorar todos os subatributos.</label>
+        <label class="option"><input type="radio" name="q62" value="D"> D) Criar uma view externa.</label>
+        <label class="option"><input type="radio" name="q62" value="E"> E) Mapear como chave estrangeira.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q63">
+      <div class="q-title">63) Regra para relacionamentos 1:1 ao mapear para relacional:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q63" value="A"> A) Escolher uma das tabelas e incluir a PK da outra como FK; incluir atributos do relacionamento.</label>
+        <label class="option"><input type="radio" name="q63" value="B"> B) Criar sempre tabela separada para o relacionamento sem FK.</label>
+        <label class="option"><input type="radio" name="q63" value="C"> C) Ignorar o relacionamento.</label>
+        <label class="option"><input type="radio" name="q63" value="D"> D) Converter em atributo multivalorado.</label>
+        <label class="option"><input type="radio" name="q63" value="E"> E) Mapear como 1:N por padrão.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q64">
+      <div class="q-title">64) Regra para relacionamentos 1:N ao mapear:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q64" value="A"> A) Incluir a chave primária da entidade do lado 1 como chave estrangeira no lado N.</label>
+        <label class="option"><input type="radio" name="q64" value="B"> B) Criar uma tabela separada sempre.</label>
+        <label class="option"><input type="radio" name="q64" value="C"> C) Transformar em atributo multivalorado do lado 1.</label>
+        <label class="option"><input type="radio" name="q64" value="D"> D) Ignorar os atributos do relacionamento.</label>
+        <label class="option"><input type="radio" name="q64" value="E"> E) Mapear como N:M por segurança.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q65">
+      <div class="q-title">65) Como mapear relacionamentos N:M?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q65" value="A"> A) Criar uma nova tabela que contém as PKs das duas entidades (formando PK composta); incluir atributos do relacionamento.</label>
+        <label class="option"><input type="radio" name="q65" value="B"> B) Ignorar completamente o relacionamento.</label>
+        <label class="option"><input type="radio" name="q65" value="C"> C) Tornar um atributo na primeira entidade.</label>
+        <label class="option"><input type="radio" name="q65" value="D"> D) Copiar todas colunas de uma tabela para outra.</label>
+        <label class="option"><input type="radio" name="q65" value="E"> E) Mapear como 1:1 sempre.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q66">
+      <div class="q-title">66) Como mapear atributos multivalorados?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q66" value="A"> A) Criar nova relação que armazena o atributo multivalorado + PK da entidade (PK composta).</label>
+        <label class="option"><input type="radio" name="q66" value="B"> B) Ignorar os valores extras.</label>
+        <label class="option"><input type="radio" name="q66" value="C"> C) Transformar em atributo derivado.</label>
+        <label class="option"><input type="radio" name="q66" value="D"> D) Armazenar em arquivo texto apenas.</label>
+        <label class="option"><input type="radio" name="q66" value="E"> E) Colocar como chave primária direta.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q67">
+      <div class="q-title">67) Ao mapear entidade fraca, qual é a chave primária da tabela resultante?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q67" value="A"> A) Combinação da chave primária da entidade forte + identificador da entidade fraca.</label>
+        <label class="option"><input type="radio" name="q67" value="B"> B) Apenas identificador sequencial sem relação.</label>
+        <label class="option"><input type="radio" name="q67" value="C"> C) Uma view externa.</label>
+        <label class="option"><input type="radio" name="q67" value="D"> D) Um índice de texto.</label>
+        <label class="option"><input type="radio" name="q67" value="E"> E) Um atributo multivalorado.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q68">
+      <div class="q-title">68) Ao mapear um relacionamento 1:1, qual fator pode orientar a escolha de onde colocar a FK?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q68" value="A"> A) Preferir a entidade com participação total no relacionamento para receber a FK.</label>
+        <label class="option"><input type="radio" name="q68" value="B"> B) Aleatoriedade.</label>
+        <label class="option"><input type="radio" name="q68" value="C"> C) Sempre colocar em ambas tabelas.</label>
+        <label class="option"><input type="radio" name="q68" value="D"> D) Nunca usar FK em 1:1.</label>
+        <label class="option"><input type="radio" name="q68" value="E"> E) Converter em N:M.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q69">
+      <div class="q-title">69) Ao mapear especialização (superclasse com subclasses), uma opção é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q69" value="A"> A) Criar tabela para a superclasse contendo atributos comuns e tabelas separadas para cada subclasse com atributos específicos e FK para a superclasse.</label>
+        <label class="option"><input type="radio" name="q69" value="B"> B) Ignorar a superclasse.</label>
+        <label class="option"><input type="radio" name="q69" value="C"> C) Transformar tudo em uma coluna JSON apenas.</label>
+        <label class="option"><input type="radio" name="q69" value="D"> D) Criar view materializada sem tabelas.</label>
+        <label class="option"><input type="radio" name="q69" value="E"> E) Mapear como N:M irrestrito.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q70">
+      <div class="q-title">70) Regra para mapear relacionamento com atributos (ex.: venda com data):</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q70" value="A"> A) Se o relacionamento vira tabela (ex.: N:M), incluir o atributo (data) nessa tabela.</label>
+        <label class="option"><input type="radio" name="q70" value="B"> B) Sempre ignorar atributos do relacionamento.</label>
+        <label class="option"><input type="radio" name="q70" value="C"> C) Colocar atributo na primeira entidade sem lógica.</label>
+        <label class="option"><input type="radio" name="q70" value="D"> D) Transformar atributo em índice.</label>
+        <label class="option"><input type="radio" name="q70" value="E"> E) Remover o relacionamento.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q71">
+      <div class="q-title">71) Se o atributo multivalorado é composto, ao mapear devemos:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q71" value="A"> A) Incluir os componentes atômicos na nova relação.</label>
+        <label class="option"><input type="radio" name="q71" value="B"> B) Ignorar todos os componentes.</label>
+        <label class="option"><input type="radio" name="q71" value="C"> C) Guardar em arquivo texto.</label>
+        <label class="option"><input type="radio" name="q71" value="D"> D) Fazer nothing (não mapear).</label>
+        <label class="option"><input type="radio" name="q71" value="E"> E) Tornar chave primaria da superclasse.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q72">
+      <div class="q-title">72) O que é melhor considerar ao escolher qual tabela recebe a FK em 1:1?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q72" value="A"> A) Escolher a entidade com participação total ou raridade de valores nulos (evitar NULOS).</label>
+        <label class="option"><input type="radio" name="q72" value="B"> B) Escolher ao acaso.</label>
+        <label class="option"><input type="radio" name="q72" value="C"> C) Sempre a tabela maior.</label>
+        <label class="option"><input type="radio" name="q72" value="D"> D) Nunca usar FK.</label>
+        <label class="option"><input type="radio" name="q72" value="E"> E) Sempre criar terceira tabela.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q73">
+      <div class="q-title">73) Ao mapear um relacionamento 1:N que tem atributos, onde colocar esses atributos?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q73" value="A"> A) Em geral, no lado N (na tabela que recebe a FK da outra).</label>
+        <label class="option"><input type="radio" name="q73" value="B"> B) Sempre em terceira tabela.</label>
+        <label class="option"><input type="radio" name="q73" value="C"> C) Em arquivo CSV apenas.</label>
+        <label class="option"><input type="radio" name="q73" value="D"> D) Em backup.</label>
+        <label class="option"><input type="radio" name="q73" value="E"> E) Em índice invertido.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q74">
+      <div class="q-title">74) Ao mapear relacionamento N:M, a chave primária da tabela associativa normalmente é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q74" value="A"> A) A combinação (concatenação) das PKs das entidades participantes.</label>
+        <label class="option"><input type="radio" name="q74" value="B"> B) Um número aleatório sem relação.</label>
+        <label class="option"><input type="radio" name="q74" value="C"> C) A PK da primeira entidade apenas.</label>
+        <label class="option"><input type="radio" name="q74" value="D"> D) A PK da segunda entidade apenas.</label>
+        <label class="option"><input type="radio" name="q74" value="E"> E) Nenhuma chave.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q75">
+      <div class="q-title">75) Quando mapear uma especialização para relacional, uma opção 'tabela por hierarquia' faz o quê?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q75" value="A"> A) Armazena todos os atributos em uma única tabela, com coluna tipo para indicar subclasse.</label>
+        <label class="option"><input type="radio" name="q75" value="B"> B) Cria tabelas separadas sem ligação.</label>
+        <label class="option"><input type="radio" name="q75" value="C"> C) Remove atributos.</label>
+        <label class="option"><input type="radio" name="q75" value="D"> D) Faz backup de cada instância.</label>
+        <label class="option"><input type="radio" name="q75" value="E"> E) Nenhuma das anteriores.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q76">
+      <div class="q-title">76) No mapeamento, por que não incluir atributos multivalorados como colunas simples?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q76" value="A"> A) Porque quebraria a atomicidade dos atributos e dificultaria consultas; prefere-se nova tabela.</label>
+        <label class="option"><input type="radio" name="q76" value="B"> B) Porque o SGBD não aceita colunas.</label>
+        <label class="option"><input type="radio" name="q76" value="C"> C) Porque sempre criamos views.</label>
+        <label class="option"><input type="radio" name="q76" value="D"> D) Porque não existem multivalorados na prática.</label>
+        <label class="option"><input type="radio" name="q76" value="E"> E) Porque são proibidos por lei.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q77">
+      <div class="q-title">77) Se um relacionamento 1:N é mapeado e o lado N recebe a FK do lado 1, qual problema queremos evitar?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q77" value="A"> A) Valores nulos inúteis na FK e inconsistências; por isso escolher cuidadosamente.</label>
+        <label class="option"><input type="radio" name="q77" value="B"> B) Que a tabela fique vazia.</label>
+        <label class="option"><input type="radio" name="q77" value="C"> C) Que o SGBD pare de funcionar.</label>
+        <label class="option"><input type="radio" name="q77" value="D"> D) Que o disco falhe.</label>
+        <label class="option"><input type="radio" name="q77" value="E"> E) Nada — não importa.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q78">
+      <div class="q-title">78) Ao mapear uma entidade com atributo multivalorado 'telefone', qual estrutura ficar melhor?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q78" value="A"> A) Criar tabela Telefones(cpf_cliente, numero) com PK composta (cpf_cliente, numero).</label>
+        <label class="option"><input type="radio" name="q78" value="B"> B) Criar coluna telefone1, telefone2,... indefinidamente.</label>
+        <label class="option"><input type="radio" name="q78" value="C"> C) Armazenar em um único campo texto separado por vírgulas sempre.</label>
+        <label class="option"><input type="radio" name="q78" value="D"> D) Ignorar telefones.</label>
+        <label class="option"><input type="radio" name="q78" value="E"> E) Fazer backup diário.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q79">
+      <div class="q-title">79) Ao mapear relacionamentos com poucas instâncias, uma alternativa é:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q79" value="A"> A) Incluir a FK na entidade que menos resultaria em NULLs (evitar tabela extra).</label>
+        <label class="option"><input type="radio" name="q79" value="B"> B) Criar tabela extra sempre, independentemente do número de instâncias.</label>
+        <label class="option"><input type="radio" name="q79" value="C"> C) Converter relacionamento em atributo multivalorado.</label>
+        <label class="option"><input type="radio" name="q79" value="D"> D) Ignorar o relacionamento.</label>
+        <label class="option"><input type="radio" name="q79" value="E"> E) Criar backup mensal.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question" id="q80">
+      <div class="q-title">80) Regra para mapear N-ários: normalmente criamos:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q80" value="A"> A) Uma relação (tabela) que representa o relacionamento e contém as FKs das entidades participantes.</label>
+        <label class="option"><input type="radio" name="q80" value="B"> B) Transformar em atributo simples.</label>
+        <label class="option"><input type="radio" name="q80" value="C"> C) Ignorar e usar apenas superchave.</label>
+        <label class="option"><input type="radio" name="q80" value="D"> D) Uma view apenas.</label>
+        <label class="option"><input type="radio" name="q80" value="E"> E) Nada — N-ários não se mapear.</label>
+      </div>
+      <div class="explanation"></div>
+    </div>
+
+    <footer>
+      Perguntas baseadas nos slides fornecidos. Arquivos usados: Aula2, aula3, aula4, Mapeamento. :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5} :contentReference[oaicite:6]{index=6} :contentReference[oaicite:7]{index=7}
+    </footer>
+  </main>
+
+<script>
+/* ANSWERS: q1..q80 */
+const answers = {
+  q1:"B", q2:"B", q3:"B", q4:"B", q5:"B",
+  q6:"B", q7:"B", q8:"C", q9:"B", q10:"A",
+  q11:"A", q12:"A", q13:"B", q14:"A", q15:"A",
+  q16:"A", q17:"A", q18:"A", q19:"A", q20:"A",
+
+  q21:"A", q22:"A", q23:"A", q24:"A", q25:"A",
+  q26:"A", q27:"A", q28:"A", q29:"A", q30:"A",
+  q31:"A", q32:"A", q33:"A", q34:"A", q35:"A",
+  q36:"A", q37:"A", q38:"A", q39:"A", q40:"A",
+
+  q41:"A", q42:"A", q43:"A", q44:"A", q45:"A",
+  q46:"A", q47:"A", q48:"A", q49:"A", q50:"A",
+  q51:"A", q52:"A", q53:"A", q54:"A", q55:"A",
+  q56:"A", q57:"A", q58:"A", q59:"A", q60:"A",
+
+  q61:"A", q62:"A", q63:"A", q64:"A", q65:"A",
+  q66:"A", q67:"A", q68:"A", q69:"A", q70:"A",
+  q71:"A", q72:"A", q73:"A", q74:"A", q75:"A",
+  q76:"A", q77:"A", q78:"A", q79:"A", q80:"A"
+};
+
+/* Short explanations for each question (concisos, iniciantes) */
+const explanations = {
+  // Aula2 (1-20)
+  q1:"SGBD é o software que gerencia bancos de dados: definir, construir, manipular e compartilhar o BD.",
+  q2:"SGBDs controlam redundância, permitem compartilhamento e oferecem segurança e backup.",
+  q3:"Metadados são dados que descrevem outros dados (estrutura do BD).",
+  q4:"Independência dados-programa: alterações físicas não obrigam mudar programas.",
+  q5:"MER é um exemplo de modelo conceitual usado para projetar BD.",
+  q6:"Instância = os dados reais no BD num dado instante (estado atual).",
+  q7:"Atomicidade: uma transação é tudo ou nada (commit/rollback).",
+  q8:"Durabilidade: alterações confirmadas persistem mesmo em falhas.",
+  q9:"Esquema descreve estruturas e restrições do BD segundo um modelo.",
+  q10:"Atributo derivado é calculado a partir de outro(s) (ex.: idade ← data_nasc).",
+  q11:"Exemplos práticos: Oracle, MySQL, PostgreSQL são SGBDs relacionais.",
+  q12:"Independência física: mudar armazenamento sem alterar esquema lógico.",
+  q13:"Modelo lógico descreve estruturas (tabelas, relações) sem detalhes físicos.",
+  q14:"Redundância = dados duplicados; SGBD busca controlá-la.",
+  q15:"Visão externa = o que o usuário vê; subconjunto/visão do BD.",
+  q16:"Concorrência = múltiplas transações acessando BD simultaneamente.",
+  q17:"Tolerância a falhas = capacidade de recuperar e manter integridade após falhas.",
+  q18:"Esquema relacional = descrição de tabelas/colunas segundo modelo relacional.",
+  q19:"Domínio = conjunto de valores válidos para um atributo.",
+  q20:"Modelos de dados definem estruturas, regras de integridade e operações.",
+
+  // aula3 (21-40)
+  q21:"Entidade representa um conjunto de instâncias do mesmo tipo (ex.: Aluno).",
+  q22:"Atributo composto é formado por subatributos (ex.: Endereço=rua,nº,bairro).",
+  q23:"Multivalorado aceita mais de um valor por instância (ex.: telefone).",
+  q24:"Superchave = conjunto de atributos que identifica instâncias (pode ter extras).",
+  q25:"Chave candidata = superchave mínima (sem atributos supérfluos).",
+  q26:"1:N: A (lado 1) → várias B (lado N); cada B tem no máximo uma A.",
+  q27:"Chen é a representação clássica do MER (retângulos e elipses).",
+  q28:"Totalidade indica se o relacionamento é obrigatório para a entidade.",
+  q29:"Exemplo de restrição de integridade: regra de negócio que deve ser respeitada.",
+  q30:"Diagrama ER ajuda a entender o domínio antes de implementar o BD.",
+  q31:"Alunos matriculados em várias disciplinas = relacionamento N:M.",
+  q32:"No estilo Chen, atributos aparecem como bolinhas ligadas à entidade.",
+  q33:"Dicionário de dados descreve entidades, atributos e domínios do BD.",
+  q34:"Relacionamento n-ário vira uma tabela que referencia todas as entidades participantes.",
+  q35:"Pré-requisito entre disciplinas é modelado como relacionamento (recursivo).",
+  q36:"Erros em relações geralmente são cardinalidade/totalidade incorretas.",
+  q37:"Sim — UML pode representar classes/relacionamentos similarmente ao MER.",
+  q38:"Chave primária tradicionalmente é indicada sublinhando o atributo.",
+  q39:"Integridade referencial garante que FKs apontem para tuplas válidas.",
+  q40:"Domínios limitam valores válidos, ajudando validação e integridade.",
+
+  // aula4 (41-60)
+  q41:"Entidade fraca depende da existência de uma entidade forte para ser identificada.",
+  q42:"Cobertura total: toda instância da superentidade pertence a alguma subentidade.",
+  q43:"Disjunção: instância pode pertencer a no máximo uma subentidade (mutuamente exclusiva).",
+  q44:"Sobreposição: instância pode pertencer a mais de uma subentidade.",
+  q45:"Generalização sintetiza diferenças de subentidades em uma superentidade comum.",
+  q46:"Subclasses herdam atributos e relacionamentos da superclasse.",
+  q47:"Especialização: subclasse é um tipo específico da superentidade (Ex.: Engenheiro é Empregado).",
+  q48:"Entidade fraca tem PK combinada com a PK da entidade forte.",
+  q49:"EER adiciona elementos (subtipos, restrições) ao MER tradicional.",
+  q50:"Existem várias estratégias de mapeamento: tabela por hierarquia, por subclasse, etc.",
+  q51:"Subentidades podem ter atributos próprios além dos herdados.",
+  q52:"CREA é exemplo de atributo específico de engenheiro (subclasse).",
+  q53:"Cobertura parcial: nem toda instância da superclasse pertence a subclasse.",
+  q54:"Se remover a entidade dominante, a fraca é normalmente removida também.",
+  q55:"Divisão combustível→ gasolina/álcool/diesel é especialização de produto.",
+  q56:"EER representa herança, especialização, restrições avançadas no modelo ER.",
+  q57:"Venda com produto e data: relacionamento venda↔produto com atributo data.",
+  q58:"EER estendido adiciona especialização, generalização e restrições ao MER.",
+  q59:"Especializar é útil quando atributos/relacionamentos aplicam-se só a alguns membros.",
+  q60:"Diagrama EER é útil para modelar BD complexos com subtipos e regras.",
+
+  // Mapeamento (61-80)
+  q61:"Para entidade regular criamos tabela com atributos e definimos chave primária.",
+  q62:"Atributo composto é mapeado incluindo seus subatributos atômicos na tabela.",
+  q63:"1:1: escolhe-se uma tabela e inclui-se a PK da outra como FK; incluir atributos do relacionamento.",
+  q64:"1:N: a PK do lado 1 vira FK no lado N; atributos do relacionamento ficam no lado N.",
+  q65:"N:M vira tabela associativa contendo as PKs das entidades (PK composta) e atributos do relacionamento.",
+  q66:"Multivalorado vira nova relação com o atributo + PK da entidade; PK composta.",
+  q67:"Entidade fraca: PK = PK da forte + identificador local da fraca.",
+  q68:"Escolher a entidade com participação total reduz chance de NULLs ao colocar a FK.",
+  q69:"Uma opção de mapeamento de especialização = tabela superclasse + tabelas para subclasse com FK.",
+  q70:"Atributos do relacionamento (ex.: data) vão para a tabela que representar o relacionamento.",
+  q71:"Se multivalorado é composto, incluir componentes atômicos na nova relação.",
+  q72:"Evitar NULLs e escolher a entidade com participação total ao posicionar a FK em 1:1.",
+  q73:"Atributos do relacionamento 1:N normalmente ficam na tabela do lado N (onde está a FK).",
+  q74:"PK da tabela associativa normalmente é a combinação das PKs das entidades participantes.",
+  q75:"Tabela por hierarquia armazena todas subclasses numa única tabela com coluna tipo.",
+  q76:"Colocar multivalorados em colunas simples quebra atomicidade; melhor criar tabela separada.",
+  q77:"Queremos evitar NULLs e inconsistências ao decidir onde colocar a FK no mapeamento 1:N.",
+  q78:"Melhor criar tabela Telefones(cliente_id, numero) com PK composta (cliente_id, numero).",
+  q79:"Se poucas instâncias, às vezes inclui-se a FK evitando criar tabela extra e NULOS desnecessários.",
+  q80:"N-ários são mapeados criando uma tabela que referencia todas as entidades participantes."
+};
+
+function markLabel(labelEl, result){
+  labelEl.classList.remove("correct","wrong");
+  if(result==="correct") labelEl.classList.add("correct");
+  if(result==="wrong") labelEl.classList.add("wrong");
+}
+
+function gradeQuiz(){
+  let correct = 0;
+  let wrong = 0;
+
+  for(const qKey of Object.keys(answers)){
+    const qDiv = document.getElementById(qKey);
+    if(!qDiv) continue;
+    const selected = qDiv.querySelector('input[type="radio"]:checked');
+    const correctLetter = answers[qKey];
+
+    // reset styles
+    qDiv.querySelectorAll('label.option').forEach(l => l.classList.remove('correct','wrong'));
+
+    if(selected){
+      const selValue = selected.value;
+      const selLabel = selected.closest('label.option');
+      const correctInput = qDiv.querySelector('input[type="radio"][value="'+correctLetter+'"]');
+      const correctLabel = correctInput ? correctInput.closest('label.option') : null;
+
+      if(selValue === correctLetter){
+        correct++;
+        if(selLabel) markLabel(selLabel,"correct");
+      } else {
+        wrong++;
+        if(selLabel) markLabel(selLabel,"wrong");
+        if(correctLabel) markLabel(correctLabel,"correct");
+      }
+    } else {
+      // não respondeu -> conta como erro e mostra correta
+      wrong++;
+      const correctInput = qDiv.querySelector('input[type="radio"][value="'+correctLetter+'"]');
+      const correctLabel = correctInput ? correctInput.closest('label.option') : null;
+      if(correctLabel) markLabel(correctLabel,"correct");
+    }
+
+    // show explanation
+    const explDiv = qDiv.querySelector('.explanation');
+    if(explDiv){
+      explDiv.style.display = "block";
+      explDiv.innerHTML = "<strong>Explicação:</strong> " + (explanations[qKey] || "—");
+    }
+
+    // disable inputs after grading
+    qDiv.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  }
+
+  document.getElementById('score').textContent = `Acertos: ${correct} | Erros: ${wrong}`;
+  document.getElementById('gradeBtn').disabled = true;
+}
+
+function resetQuiz(){
+  document.getElementById('gradeBtn').disabled = false;
+  document.getElementById('score').textContent = 'Acertos: 0 | Erros: 0';
+  for(const qKey of Object.keys(answers)){
+    const qDiv = document.getElementById(qKey);
+    if(!qDiv) continue;
+    qDiv.querySelectorAll('input[type="radio"]').forEach(r => { r.checked = false; r.disabled = false; });
+    qDiv.querySelectorAll('label.option').forEach(l => l.classList.remove('correct','wrong'));
+    const explDiv = qDiv.querySelector('.explanation');
+    if(explDiv){ explDiv.style.display = 'none'; explDiv.textContent = ''; }
+  }
+}
+
+document.getElementById('gradeBtn').addEventListener('click', gradeQuiz);
+document.getElementById('resetBtn').addEventListener('click', resetQuiz);
+</script>
+</body>
+</html>
